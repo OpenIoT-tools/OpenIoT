@@ -61,7 +61,6 @@ The **MVP** of the project uses the following technologies:
 Below is an overview of the system architecture:
 
 ![Architecture Diagram](docs/Architecture.png)  
-*(Insert here the image representing the system architecture.)*
 
 ---
 
