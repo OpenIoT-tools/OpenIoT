@@ -24,7 +24,7 @@ func NewDevice(hardwareVersion float64, version *Version, category *Category) (*
 	if err := device.validVersion(); err != nil {
 		return nil, err
 	}
-	if err := device.validHardwareVersion(); err != nil {
+	if err := device.validHardwareVersion(device.hardwareVersion); err != nil {
 		return nil, err
 	}
 
@@ -35,7 +35,7 @@ func (d *Device) UpdateTargetVersion(newVersion *Version) (*Device, error) {
 	if err := d.validVersion(); err != nil {
 		return nil, err
 	}
-	if err := d.validHardwareVersion(); err != nil {
+	if err := d.validHardwareVersion(d.hardwareVersion); err != nil {
 		return nil, err
 	}
 	d.targetVersion = newVersion
@@ -51,6 +51,14 @@ func (d *Device) UpdateCurrentVersion(newVersion *Version) (*Device, error) {
 	return d, nil
 }
 
+func (d *Device) UpdateHardwareVersion(version float64) (*Device, error) {
+	if err := d.validHardwareVersion(version); err != nil {
+		return nil, err
+	}
+	d.hardwareVersion = version
+	return d, nil
+}
+
 func (d *Device) validVersion() error {
 	if d.targetVersion.category.id != d.category.id {
 		return fmt.Errorf("device version must be the same category as device")
@@ -58,9 +66,11 @@ func (d *Device) validVersion() error {
 	return nil
 }
 
-func (d *Device) validHardwareVersion() error {
-	if d.targetVersion.minimumHardwareVersion > d.hardwareVersion {
-		return fmt.Errorf("this version is only compatible with devices with versions later than 5.0")
+func (d *Device) validHardwareVersion(hardwareVersion float64) error {
+	if hardwareVersion < d.targetVersion.minimumHardwareVersion || hardwareVersion > d.targetVersion.maximumHardwareVersion {
+		return fmt.Errorf(
+			"the version is only compatible with the hardware version between %f and %f, but the hardware version is %f",
+			d.targetVersion.minimumHardwareVersion, d.targetVersion.maximumHardwareVersion, hardwareVersion)
 	}
 	return nil
 }

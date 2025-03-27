@@ -13,6 +13,7 @@ type Version struct {
 	description            string
 	category               *Category
 	minimumHardwareVersion float64
+	maximumHardwareVersion float64
 	createdAt              time.Time
 }
 
