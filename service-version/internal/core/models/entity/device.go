@@ -43,6 +43,8 @@ func (d *Device) UpdateTargetVersion(newVersion *Version) (*Device, error) {
 	return d, nil
 }
 
+// Update Current Version should be used to update the current system version
+// newVersion should be equal to currentTargetVersion
 func (d *Device) UpdateCurrentVersion(newVersion *Version) (*Device, error) {
 	if newVersion.id != d.targetVersion.id {
 		return nil, fmt.Errorf("current device version must be equal to targetVersion")
@@ -73,4 +75,8 @@ func (d *Device) validHardwareVersion(hardwareVersion float64) error {
 			d.targetVersion.minimumHardwareVersion, d.targetVersion.maximumHardwareVersion, hardwareVersion)
 	}
 	return nil
+}
+
+func (d *Device) GetCategory() *Category {
+	return d.category
 }

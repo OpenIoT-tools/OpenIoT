@@ -32,6 +32,10 @@ func NewVersion(name, description string, minimumHardwareVersion float64, catego
 	return &version, nil
 }
 
+func (v *Version) GetCategory() *Category {
+	return v.category
+}
+
 func (v *Version) validVersion() error {
 	if err := v.validName(); err != nil {
 		return err

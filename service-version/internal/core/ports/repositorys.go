@@ -5,10 +5,11 @@ import (
 )
 
 type VersionRespository interface {
-	CreateVersion(version *entity.Version) (*entity.Version, error)
-	RemoveVersion(versionId string) error
-	ListVersionsByCategory(categoryId string) (*[]entity.Version, error)
-	FindVersionById(versionId string) (*entity.Version, error)
+	Create(version *entity.Version) (*entity.Version, error)
+	Remove(versionId string) error
+	ListByCategory(categoryId string) (*[]entity.Version, error)
+	FindById(versionId string) (*entity.Version, error)
+	FindByNameAndCategory(versionName string, category *entity.Category) (*entity.Version, error)
 }
 
 type DeviceRespository interface {
@@ -17,7 +18,7 @@ type DeviceRespository interface {
 	ListDevicesByCategory(categoryId string) ([]*entity.Device, error)
 	ListDevicesById(devicesId ...string) ([]*entity.Device, error)
 	FindDeviceById(deviceId string) (*entity.Device, error)
-	UpdateVersion(device entity.Device) (*entity.Device, error)
+	UpdateVersion(device *entity.Device) (*entity.Device, error)
 	UpdateTargetVersion(device ...*entity.Device) ([]*entity.Device, error)
 	UpdateHardware(device *entity.Device) (*entity.Device, error)
 }

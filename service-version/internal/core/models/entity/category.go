@@ -41,3 +41,7 @@ func (c *Category) validName() error {
 	}
 	return nil
 }
+
+func (c *Category) GetId() string {
+	return c.id
+}
