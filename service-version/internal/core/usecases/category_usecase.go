@@ -1,4 +1,4 @@
-package services
+package usecases
 
 import (
 	"github.com/OpenIoT-tools/OpenIoT/internal/core/models/entity"

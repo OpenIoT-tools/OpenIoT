@@ -1,4 +1,4 @@
-package dtos
+package pagination
 
 type PaginationResponse[T any] struct {
 	Data        []*T `json:"data"`

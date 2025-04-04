@@ -80,3 +80,7 @@ func (d *Device) validHardwareVersion(hardwareVersion float64) error {
 func (d *Device) GetCategory() *Category {
 	return d.category
 }
+
+func (d *Device) GetHardwateVersion() float64 {
+	return d.hardwareVersion
+}
