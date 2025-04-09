@@ -27,7 +27,7 @@ func (d *Deploy) SendUpdate(hoursLong uint32, devices ...*entity.Device) error {
 	date := time.Now().Add(time.Minute * 10)
 	for i, device := range devices {
 		if i > 0 && i%int(devicesByGroup) == 0 {
-			date.Add(time.Duration(updateInterval) * time.Minute)
+			date = date.Add(time.Duration(updateInterval) * time.Minute)
 		}
 		if err := d.sendUpdate(device, date); err != nil {
 			return err
@@ -39,11 +39,14 @@ func (d *Deploy) SendUpdate(hoursLong uint32, devices ...*entity.Device) error {
 func (d *Deploy) sendUpdate(device *entity.Device, updateTime time.Time) error {
 	updateData := map[string]any{
 		"update_time":     updateTime.Unix(),
-		"url_update":      "",
 		"hardwareVersion": device.GetHardwateVersion(),
 	}
+	token, err := security.GenerateToken(updateData, 10, "DEVICE_PRIVATE_KEY")
+	if err != nil {
+		return err
+	}
 
-	deviceDTO := deviceupdate.NewSecureDeviceUpdate(security.GenerateToken(updateData, 10))
+	deviceDTO := deviceupdate.NewSecureDeviceUpdate(token)
 	if err := d.broker.SendUpdateToDevice(deviceDTO, device); err != nil {
 		return err
 	}
