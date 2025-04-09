@@ -84,3 +84,7 @@ func (d *Device) GetCategory() *Category {
 func (d *Device) GetHardwateVersion() float64 {
 	return d.hardwareVersion
 }
+
+func (d *Device) GetTargetVersion() *Version {
+	return d.targetVersion
+}

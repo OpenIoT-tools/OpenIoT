@@ -6,15 +6,13 @@ import "time"
 type DeviceUpdate struct {
 	Token           string    `json:"token"`
 	UpdateTime      time.Time `json:"update_time"`
-	UrlUpdate       string    `json:"url_update"`
 	HardwareVersion float64   `json:"hardware_version"`
 }
 
 // NewDeviceUpdate creates an object that will transport unprotected information
-func NewDeviceUpdate(updateTime time.Time, urlUpdate string, hardwareVersion float64) *DeviceUpdate {
+func NewDeviceUpdate(updateTime time.Time, hardwareVersion float64) *DeviceUpdate {
 	return &DeviceUpdate{
 		UpdateTime:      updateTime,
-		UrlUpdate:       urlUpdate,
 		HardwareVersion: hardwareVersion,
 	}
 }

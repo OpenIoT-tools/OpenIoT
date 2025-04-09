@@ -19,6 +19,16 @@ func NewDeviceService(repository ports.DeviceRespository, versionRepository port
 	}
 }
 
+// Find Device Version should be used to get the device version
+func (d *DeviceService) FindDeviceVersion(deviceId string) (*entity.Version, error) {
+	device, err := d.repository.FindDeviceById(deviceId)
+	if err != nil {
+		return nil, err
+	}
+	return device.GetTargetVersion(), nil
+}
+
+// CreateDevice shoud be user for create an device
 func (d *DeviceService) CreateDevice(device *entity.Device) (*entity.Device, error) {
 	createdDevice, err := d.repository.CreateDevice(device)
 	if err != nil {
@@ -31,14 +41,17 @@ func (d *DeviceService) CreateDevice(device *entity.Device) (*entity.Device, err
 	return createdDevice, nil
 }
 
+// RemoveDevice shoud be user for remove an device
 func (d *DeviceService) RemoveDevice(deviceId string) error {
 	return d.repository.RemoveDevice(deviceId)
 }
 
+// ListDevices should be used to list all devices in the category
 func (d *DeviceService) ListDevices(categoryId string) ([]*entity.Device, error) {
 	return d.repository.ListDevicesByCategory(categoryId)
 }
 
+// UpdateTargetVersion should be used for both update and device group
 func (d *DeviceService) UpdateTargetVersion(versionId string, updateDurationHours uint32, devicesId ...string) ([]*entity.Device, error) {
 	devices, err := d.repository.ListDevicesById(devicesId...)
 	if err != nil {
@@ -47,6 +60,7 @@ func (d *DeviceService) UpdateTargetVersion(versionId string, updateDurationHour
 	return d.updateDeviceVersion(versionId, updateDurationHours, devices...)
 }
 
+// UpdateTargetVersionByCategory should be used to update all devices in the category
 func (d *DeviceService) UpdateTargetVersionByCategory(categoryId string, versionId string, updateDurationHours uint32) ([]*entity.Device, error) {
 	devices, err := d.repository.ListDevicesByCategory(categoryId)
 	if err != nil {
@@ -55,6 +69,7 @@ func (d *DeviceService) UpdateTargetVersionByCategory(categoryId string, version
 	return d.updateDeviceVersion(versionId, updateDurationHours, devices...)
 }
 
+// UpdateHardware should be user to update device hardware
 func (d *DeviceService) UpdateHardware(deviceId string, hardware float64) (*entity.Device, error) {
 	device, err := d.repository.FindDeviceById(deviceId)
 	if err != nil {
