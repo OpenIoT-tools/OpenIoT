@@ -9,7 +9,10 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func loadPrivateKey(privateKeyName string) (*rsa.PrivateKey, error) {
+type Jwt struct {
+}
+
+func (j *Jwt) loadPrivateKey(privateKeyName string) (*rsa.PrivateKey, error) {
 	pem := os.Getenv(privateKeyName)
 	if pem == "" {
 		return nil, fmt.Errorf("cannot find private key")
@@ -23,7 +26,7 @@ func loadPrivateKey(privateKeyName string) (*rsa.PrivateKey, error) {
 }
 
 // GenerateToken should be used to generate an asynchronous jwt token
-func GenerateToken(tokenData map[string]any, minutesLong int, privateKeyName string) (string, error) {
+func (j *Jwt) GenerateToken(tokenData map[string]any, minutesLong int, privateKeyName string) (string, error) {
 	claims := jwt.MapClaims{
 		"exp": time.Now().Add(time.Minute * time.Duration(minutesLong)).Unix(),
 	}
@@ -31,7 +34,7 @@ func GenerateToken(tokenData map[string]any, minutesLong int, privateKeyName str
 		claims[key] = value
 	}
 
-	privateKey, err := loadPrivateKey(privateKeyName)
+	privateKey, err := j.loadPrivateKey(privateKeyName)
 	if err != nil {
 		return "", err
 	}

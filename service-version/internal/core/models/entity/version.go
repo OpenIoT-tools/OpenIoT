@@ -17,13 +17,14 @@ type Version struct {
 	createdAt              time.Time
 }
 
-func NewVersion(name, description string, minimumHardwareVersion float64, category *Category) (*Version, error) {
+func NewVersion(name, description string, minimumHardwareVersion, maximumHardwareVersion float64, category *Category) (*Version, error) {
 	version := Version{
 		id:                     uuid.NewString(),
 		name:                   name,
 		description:            description,
 		category:               category,
 		minimumHardwareVersion: minimumHardwareVersion,
+		maximumHardwareVersion: maximumHardwareVersion,
 		createdAt:              time.Now(),
 	}
 	if err := version.validVersion(); err != nil {

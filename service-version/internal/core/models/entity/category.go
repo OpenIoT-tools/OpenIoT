@@ -14,6 +14,7 @@ type Category struct {
 	updatedAt time.Time
 }
 
+// NewCategory should be used to create a category. If an invalid name is passed, an error will be returned.
 func NewCategory(name string) (*Category, error) {
 	category := &Category{
 		id:        uuid.NewString(),
