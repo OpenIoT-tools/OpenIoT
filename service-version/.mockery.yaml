@@ -1,0 +1,10 @@
+all: True
+dir: "tests/mocks/"
+outpkg: "mocks"
+filename: "{{.InterfaceName}}.go"
+mockname: "{{.InterfaceName}}"
+with-expecter: True
+packages:
+  github.com/OpenIoT-tools/OpenIoT:
+    config:
+      recursive: True
