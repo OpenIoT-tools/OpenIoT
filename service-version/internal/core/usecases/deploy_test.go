@@ -1,6 +1,7 @@
 package usecases_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/OpenIoT-tools/OpenIoT/internal/core/models/entity"
@@ -68,6 +69,16 @@ func TestDeploy_SendUpdate(t *testing.T) {
 			broker:          broker,
 			security:        security,
 		},
+		{
+			name:            "when devices are not sent, it should return an error",
+			updateTime:      2,
+			devices:         fixture.GetDevices(0),
+			expectedDevices: 0,
+			expectedMinutes: 0,
+			expectedErr:     fmt.Errorf("no devices sent for update"),
+			broker:          broker,
+			security:        security,
+		},
 	}
 
 	for _, test := range testCases {
@@ -80,7 +91,4 @@ func TestDeploy_SendUpdate(t *testing.T) {
 			assert.Equal(t, test.expectedErr, err)
 		})
 	}
-
-	// when devices is not sent, should return an error
-	// when divices are sent, should sent first update imidiately
 }

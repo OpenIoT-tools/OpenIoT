@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"fmt"
 	"math"
 	"time"
 
@@ -25,6 +26,9 @@ func NewDeploy(broker ports.Broker, securityToken security.SecurityToken) *Deplo
 // UpdateWithBlueGreen is responsible for updating all devices sent
 // This update will be made over the defined time
 func (d *Deploy) SendUpdate(hoursLong float64, devices ...*entity.Device) (devicesByGroup int, updateInterval int, err error) {
+	if len(devices) < 1 {
+		return 0, 0, fmt.Errorf("no devices sent for update")
+	}
 	devicesByGroup, updateInterval = d.getNumberOfDevicesPerMinute(hoursLong, len(devices))
 
 	date := time.Now().Add(time.Minute * 10)
