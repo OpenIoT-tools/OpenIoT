@@ -21,7 +21,7 @@ func NewDevice(hardwareVersion float64, version *Version, category *Category) (*
 		category:        category,
 		targetVersion:   version,
 	}
-	if err := device.validVersion(); err != nil {
+	if err := device.validVersion(version); err != nil {
 		return nil, err
 	}
 	if err := device.validHardwareVersion(device.hardwareVersion); err != nil {
@@ -32,7 +32,7 @@ func NewDevice(hardwareVersion float64, version *Version, category *Category) (*
 }
 
 func (d *Device) UpdateTargetVersion(newVersion *Version) (*Device, error) {
-	if err := d.validVersion(); err != nil {
+	if err := d.validVersion(newVersion); err != nil {
 		return nil, err
 	}
 	if err := d.validHardwareVersion(d.hardwareVersion); err != nil {
@@ -61,8 +61,8 @@ func (d *Device) UpdateHardwareVersion(version float64) (*Device, error) {
 	return d, nil
 }
 
-func (d *Device) validVersion() error {
-	if d.targetVersion.category.id != d.category.id {
+func (d *Device) validVersion(targetVersion *Version) error {
+	if targetVersion.category.id != d.category.id {
 		return fmt.Errorf("device version must be the same category as device")
 	}
 	return nil
@@ -87,4 +87,8 @@ func (d *Device) GetHardwateVersion() float64 {
 
 func (d *Device) GetTargetVersion() *Version {
 	return d.targetVersion
+}
+
+func (d *Device) GetId() string {
+	return d.id
 }

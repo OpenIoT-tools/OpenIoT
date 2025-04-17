@@ -33,10 +33,6 @@ func NewVersion(name, description string, minimumHardwareVersion, maximumHardwar
 	return &version, nil
 }
 
-func (v *Version) GetCategory() *Category {
-	return v.category
-}
-
 func (v *Version) validVersion() error {
 	if err := v.validName(); err != nil {
 		return err
@@ -59,4 +55,16 @@ func (v *Version) validDescription() error {
 		return fmt.Errorf("description must be less than 200 characters")
 	}
 	return nil
+}
+
+func (v *Version) GetCategory() *Category {
+	return v.category
+}
+
+func (v *Version) GetId() string {
+	return v.id
+}
+
+func (v *Version) GetName() string {
+	return v.name
 }

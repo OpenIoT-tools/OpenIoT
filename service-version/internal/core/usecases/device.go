@@ -93,9 +93,9 @@ func (d *DeviceService) SyncDeviceVersion(deviceId, versionName string) (*entity
 		return nil, err
 	}
 
-	device, err = device.UpdateCurrentVersion(version)
+	_, err = device.UpdateCurrentVersion(version)
 	if err != nil {
-		if _, _, err := d.deploy.SendUpdate(0, device); err != nil {
+		if _, _, err := d.deploy.SendUpdate(0.0, device); err != nil {
 			return nil, err
 		}
 		return device, nil
