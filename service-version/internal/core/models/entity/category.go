@@ -37,8 +37,8 @@ func (c *Category) UpdateName(name string) (*Category, error) {
 }
 
 func (c *Category) validName() error {
-	if len(c.name) > 30 {
-		return fmt.Errorf("name must be less than 50 characters")
+	if len(c.name) > 100 {
+		return fmt.Errorf("name must be less than 100 characters")
 	}
 	return nil
 }
