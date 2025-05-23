@@ -11,3 +11,4 @@ mocks:
 
 test:
 	go test $(GO_PATHS)
+

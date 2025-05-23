@@ -79,23 +79,23 @@ func (_c *CategoryUseCase_CreateCategory_Call) RunAndReturn(run func(*entity.Cat
 }
 
 // ListCategories provides a mock function with no fields
-func (_m *CategoryUseCase) ListCategories() (*[]entity.Category, error) {
+func (_m *CategoryUseCase) ListCategories() ([]*entity.Category, error) {
 	ret := _m.Called()
 
 	if len(ret) == 0 {
 		panic("no return value specified for ListCategories")
 	}
 
-	var r0 *[]entity.Category
+	var r0 []*entity.Category
 	var r1 error
-	if rf, ok := ret.Get(0).(func() (*[]entity.Category, error)); ok {
+	if rf, ok := ret.Get(0).(func() ([]*entity.Category, error)); ok {
 		return rf()
 	}
-	if rf, ok := ret.Get(0).(func() *[]entity.Category); ok {
+	if rf, ok := ret.Get(0).(func() []*entity.Category); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*[]entity.Category)
+			r0 = ret.Get(0).([]*entity.Category)
 		}
 	}
 
@@ -125,12 +125,12 @@ func (_c *CategoryUseCase_ListCategories_Call) Run(run func()) *CategoryUseCase_
 	return _c
 }
 
-func (_c *CategoryUseCase_ListCategories_Call) Return(_a0 *[]entity.Category, _a1 error) *CategoryUseCase_ListCategories_Call {
+func (_c *CategoryUseCase_ListCategories_Call) Return(_a0 []*entity.Category, _a1 error) *CategoryUseCase_ListCategories_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *CategoryUseCase_ListCategories_Call) RunAndReturn(run func() (*[]entity.Category, error)) *CategoryUseCase_ListCategories_Call {
+func (_c *CategoryUseCase_ListCategories_Call) RunAndReturn(run func() ([]*entity.Category, error)) *CategoryUseCase_ListCategories_Call {
 	_c.Call.Return(run)
 	return _c
 }

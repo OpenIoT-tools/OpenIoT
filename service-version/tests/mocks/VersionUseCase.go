@@ -79,23 +79,23 @@ func (_c *VersionUseCase_CreateVersion_Call) RunAndReturn(run func(*entity.Versi
 }
 
 // ListVersions provides a mock function with given fields: categoryId
-func (_m *VersionUseCase) ListVersions(categoryId string) (*[]entity.Version, error) {
+func (_m *VersionUseCase) ListVersions(categoryId string) ([]*entity.Version, error) {
 	ret := _m.Called(categoryId)
 
 	if len(ret) == 0 {
 		panic("no return value specified for ListVersions")
 	}
 
-	var r0 *[]entity.Version
+	var r0 []*entity.Version
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string) (*[]entity.Version, error)); ok {
+	if rf, ok := ret.Get(0).(func(string) ([]*entity.Version, error)); ok {
 		return rf(categoryId)
 	}
-	if rf, ok := ret.Get(0).(func(string) *[]entity.Version); ok {
+	if rf, ok := ret.Get(0).(func(string) []*entity.Version); ok {
 		r0 = rf(categoryId)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*[]entity.Version)
+			r0 = ret.Get(0).([]*entity.Version)
 		}
 	}
 
@@ -126,12 +126,12 @@ func (_c *VersionUseCase_ListVersions_Call) Run(run func(categoryId string)) *Ve
 	return _c
 }
 
-func (_c *VersionUseCase_ListVersions_Call) Return(_a0 *[]entity.Version, _a1 error) *VersionUseCase_ListVersions_Call {
+func (_c *VersionUseCase_ListVersions_Call) Return(_a0 []*entity.Version, _a1 error) *VersionUseCase_ListVersions_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *VersionUseCase_ListVersions_Call) RunAndReturn(run func(string) (*[]entity.Version, error)) *VersionUseCase_ListVersions_Call {
+func (_c *VersionUseCase_ListVersions_Call) RunAndReturn(run func(string) ([]*entity.Version, error)) *VersionUseCase_ListVersions_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -16,7 +16,7 @@ func TestDeploy_SendUpdate(t *testing.T) {
 	broker := mocks.NewBroker(t)
 	security := mocks.NewSecurityToken(t)
 	broker.On("SendUpdateToDevice", mock.Anything, mock.Anything).Return(nil)
-	security.On("GenerateToken", mock.Anything, mock.Anything, mock.Anything).Return("token", nil)
+	security.On("GenerateAsymmetricToken", mock.Anything, mock.Anything, mock.Anything).Return("token", nil)
 
 	type testData struct {
 		name                             string

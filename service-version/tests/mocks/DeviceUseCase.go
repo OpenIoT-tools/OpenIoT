@@ -137,23 +137,23 @@ func (_c *DeviceUseCase_FindDeviceVersion_Call) RunAndReturn(run func(string) (*
 }
 
 // ListDevices provides a mock function with given fields: categoryId
-func (_m *DeviceUseCase) ListDevices(categoryId string) (*[]entity.Device, error) {
+func (_m *DeviceUseCase) ListDevices(categoryId string) ([]*entity.Device, error) {
 	ret := _m.Called(categoryId)
 
 	if len(ret) == 0 {
 		panic("no return value specified for ListDevices")
 	}
 
-	var r0 *[]entity.Device
+	var r0 []*entity.Device
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string) (*[]entity.Device, error)); ok {
+	if rf, ok := ret.Get(0).(func(string) ([]*entity.Device, error)); ok {
 		return rf(categoryId)
 	}
-	if rf, ok := ret.Get(0).(func(string) *[]entity.Device); ok {
+	if rf, ok := ret.Get(0).(func(string) []*entity.Device); ok {
 		r0 = rf(categoryId)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*[]entity.Device)
+			r0 = ret.Get(0).([]*entity.Device)
 		}
 	}
 
@@ -184,12 +184,12 @@ func (_c *DeviceUseCase_ListDevices_Call) Run(run func(categoryId string)) *Devi
 	return _c
 }
 
-func (_c *DeviceUseCase_ListDevices_Call) Return(_a0 *[]entity.Device, _a1 error) *DeviceUseCase_ListDevices_Call {
+func (_c *DeviceUseCase_ListDevices_Call) Return(_a0 []*entity.Device, _a1 error) *DeviceUseCase_ListDevices_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *DeviceUseCase_ListDevices_Call) RunAndReturn(run func(string) (*[]entity.Device, error)) *DeviceUseCase_ListDevices_Call {
+func (_c *DeviceUseCase_ListDevices_Call) RunAndReturn(run func(string) ([]*entity.Device, error)) *DeviceUseCase_ListDevices_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -359,7 +359,7 @@ func (_c *DeviceUseCase_UpdateHardware_Call) RunAndReturn(run func(string, float
 }
 
 // UpdateTargetVersion provides a mock function with given fields: versionId, updateDurationHours, devicesId
-func (_m *DeviceUseCase) UpdateTargetVersion(versionId string, updateDurationHours float64, devicesId ...string) (*entity.Device, error) {
+func (_m *DeviceUseCase) UpdateTargetVersion(versionId string, updateDurationHours float64, devicesId ...string) ([]*entity.Device, error) {
 	_va := make([]interface{}, len(devicesId))
 	for _i := range devicesId {
 		_va[_i] = devicesId[_i]
@@ -373,16 +373,16 @@ func (_m *DeviceUseCase) UpdateTargetVersion(versionId string, updateDurationHou
 		panic("no return value specified for UpdateTargetVersion")
 	}
 
-	var r0 *entity.Device
+	var r0 []*entity.Device
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string, float64, ...string) (*entity.Device, error)); ok {
+	if rf, ok := ret.Get(0).(func(string, float64, ...string) ([]*entity.Device, error)); ok {
 		return rf(versionId, updateDurationHours, devicesId...)
 	}
-	if rf, ok := ret.Get(0).(func(string, float64, ...string) *entity.Device); ok {
+	if rf, ok := ret.Get(0).(func(string, float64, ...string) []*entity.Device); ok {
 		r0 = rf(versionId, updateDurationHours, devicesId...)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*entity.Device)
+			r0 = ret.Get(0).([]*entity.Device)
 		}
 	}
 
@@ -422,19 +422,44 @@ func (_c *DeviceUseCase_UpdateTargetVersion_Call) Run(run func(versionId string,
 	return _c
 }
 
-func (_c *DeviceUseCase_UpdateTargetVersion_Call) Return(_a0 *entity.Device, _a1 error) *DeviceUseCase_UpdateTargetVersion_Call {
+func (_c *DeviceUseCase_UpdateTargetVersion_Call) Return(_a0 []*entity.Device, _a1 error) *DeviceUseCase_UpdateTargetVersion_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *DeviceUseCase_UpdateTargetVersion_Call) RunAndReturn(run func(string, float64, ...string) (*entity.Device, error)) *DeviceUseCase_UpdateTargetVersion_Call {
+func (_c *DeviceUseCase_UpdateTargetVersion_Call) RunAndReturn(run func(string, float64, ...string) ([]*entity.Device, error)) *DeviceUseCase_UpdateTargetVersion_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // UpdateTargetVersionByCategory provides a mock function with given fields: categoryId, versionId, updateDuration
-func (_m *DeviceUseCase) UpdateTargetVersionByCategory(categoryId string, versionId string, updateDuration float64) {
-	_m.Called(categoryId, versionId, updateDuration)
+func (_m *DeviceUseCase) UpdateTargetVersionByCategory(categoryId string, versionId string, updateDuration float64) ([]*entity.Device, error) {
+	ret := _m.Called(categoryId, versionId, updateDuration)
+
+	if len(ret) == 0 {
+		panic("no return value specified for UpdateTargetVersionByCategory")
+	}
+
+	var r0 []*entity.Device
+	var r1 error
+	if rf, ok := ret.Get(0).(func(string, string, float64) ([]*entity.Device, error)); ok {
+		return rf(categoryId, versionId, updateDuration)
+	}
+	if rf, ok := ret.Get(0).(func(string, string, float64) []*entity.Device); ok {
+		r0 = rf(categoryId, versionId, updateDuration)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]*entity.Device)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(string, string, float64) error); ok {
+		r1 = rf(categoryId, versionId, updateDuration)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // DeviceUseCase_UpdateTargetVersionByCategory_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'UpdateTargetVersionByCategory'
@@ -457,13 +482,13 @@ func (_c *DeviceUseCase_UpdateTargetVersionByCategory_Call) Run(run func(categor
 	return _c
 }
 
-func (_c *DeviceUseCase_UpdateTargetVersionByCategory_Call) Return() *DeviceUseCase_UpdateTargetVersionByCategory_Call {
-	_c.Call.Return()
+func (_c *DeviceUseCase_UpdateTargetVersionByCategory_Call) Return(_a0 []*entity.Device, _a1 error) *DeviceUseCase_UpdateTargetVersionByCategory_Call {
+	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *DeviceUseCase_UpdateTargetVersionByCategory_Call) RunAndReturn(run func(string, string, float64)) *DeviceUseCase_UpdateTargetVersionByCategory_Call {
-	_c.Run(run)
+func (_c *DeviceUseCase_UpdateTargetVersionByCategory_Call) RunAndReturn(run func(string, string, float64) ([]*entity.Device, error)) *DeviceUseCase_UpdateTargetVersionByCategory_Call {
+	_c.Call.Return(run)
 	return _c
 }
 

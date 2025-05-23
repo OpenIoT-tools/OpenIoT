@@ -1,5 +1,6 @@
 package security
 
 type SecurityToken interface {
-	GenerateToken(tokenData map[string]any, minutesLong int, privateKeyName string) (string, error)
+	GenerateAsymmetricToken(tokenData map[string]any, minutesLong int) (string, error)
+	ValidateSymmetricalToken(tokenStr string) (map[string]interface{}, error)
 }

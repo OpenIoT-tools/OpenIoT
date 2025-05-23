@@ -48,7 +48,7 @@ func (d *Deploy) sendUpdate(device *entity.Device, updateTime time.Time) error {
 		"update_time":     updateTime.Unix(),
 		"hardwareVersion": device.GetHardwateVersion(),
 	}
-	token, err := d.securityToken.GenerateToken(updateData, 10, "DEVICE_PRIVATE_KEY")
+	token, err := d.securityToken.GenerateAsymmetricToken(updateData, 10)
 	if err != nil {
 		return err
 	}
