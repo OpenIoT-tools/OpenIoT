@@ -1,0 +1,13 @@
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: openIOT
+    ports:
+      - 8080:8080
+    env_file:
+      - .dev.env
+    volumes:
+      - .:/app

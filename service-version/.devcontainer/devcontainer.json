@@ -1,0 +1,19 @@
+{
+  "name": "Go App Container",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "forwardPorts": [8080],
+  "postCreateCommand": "go mod download",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go"
+      ],
+      "settings": {
+        "go.gopath": "/go",
+        "go.inferGopath": true
+      }
+    }
+  }
+}
