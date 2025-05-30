@@ -9,9 +9,10 @@ type VersionUseCase interface {
 }
 
 type DeviceUseCase interface {
-	FindDeviceVersion(deviceId string) (*entity.Version, error)
+	FindDeviceVersion(id string) (*entity.Version, error)
+	FindDeviceById(id string) (*entity.Device, error)
 	CreateDevice(device *entity.Device) (*entity.Device, error)
-	RemoveDevice(deviceId string) error
+	RemoveDevice(id string) error
 	ListDevices(categoryId string) ([]*entity.Device, error)
 	UpdateTargetVersion(versionId string, updateDurationHours float64, devicesId ...string) ([]*entity.Device, error)
 	UpdateTargetVersionByCategory(categoryId string, versionId string, updateDuration float64) ([]*entity.Device, error)

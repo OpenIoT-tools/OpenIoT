@@ -28,6 +28,15 @@ func (d *DeviceService) FindDeviceVersion(deviceId string) (*entity.Version, err
 	return device.GetTargetVersion(), nil
 }
 
+// Find Device Version should be used to get the device version
+func (d *DeviceService) FindDeviceById(deviceId string) (*entity.Device, error) {
+	device, err := d.repository.FindDeviceById(deviceId)
+	if err != nil {
+		return nil, err
+	}
+	return device, nil
+}
+
 // CreateDevice shoud be user for create an device
 func (d *DeviceService) CreateDevice(device *entity.Device) (*entity.Device, error) {
 	createdDevice, err := d.repository.CreateDevice(device)

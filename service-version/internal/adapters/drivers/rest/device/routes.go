@@ -15,7 +15,7 @@ func StartDeviceApi(r *chi.Mux, deviceRepository ports.DeviceRespository, versio
 	r.Route("/device", func(r chi.Router) {
 		r.Use(middlewares.SetAuthMiddleware(securityToken))
 		r.Get("/{id}", constroller.findDevice)
-		r.Post("", constroller.createDevice)
+		r.Post("/", constroller.createDevice)
 		r.Delete("/{id}", constroller.removeDevice)
 		r.Get("/", constroller.listDevices)
 		r.Patch("/version", constroller.updateVersionByCategory)
